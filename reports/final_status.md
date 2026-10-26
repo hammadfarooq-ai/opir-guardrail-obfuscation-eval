@@ -22,7 +22,7 @@ Environment setup (`python -m venv`, `pip install torch gliclass transformers pa
 
 ## Not done / blocked / caveats
 - Local CPU **final** and **dev** runs were not performed (GPU run covers them). The CPU latency benchmark was completed (results/latency/latency_cpu.json) and is reported separately from GPU timings.
-- Audit (after the run): headline 54/100 and 71/100 FPR verified from raw predictions; no bug found, no code changed after the freeze; see evaluation_report.md section 2.1. Many JBB 'benign' prompts are borderline, so the FPR mixes real over-blocking and policy/label mismatch.
+- Audit (after the run): headline 54/100 and 71/100 FPR verified from raw predictions; no bug found, no code changed after the freeze; see evaluation_report.md section 2.1. The FPR is the observed flag count under the dataset's benign labels; possible policy mismatch is an untested interpretation. Pilot, dev and final ran automatically in one Kaggle sequence with no manual inspection gate; no setting was changed using final results.
 - `pip install -e ".[dev]"` and `pip install -r requirements.lock.txt` were not re-tested from a clean environment (the lock file has a `+cpu` torch pin that needs the PyTorch CPU index).
 - Two normalization round-trips were inexact (documented, not patched after freezing).
 - `results/pilot_cpu_prefreeze_normalizer/` is an earlier CPU pilot output generated before the spaced-rule fix; retained for transparency, not used in reports.

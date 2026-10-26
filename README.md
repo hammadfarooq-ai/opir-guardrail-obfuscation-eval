@@ -17,12 +17,12 @@ Do simple obfuscations reduce detection of unsafe prompts, does deterministic no
 | opir-large | 97/100 | 54/100 | 68/100 / 1/100 | 97/100 |
 | opir-edge | 97/100 | 71/100 | 2/100 / 8/100 | 97/100 |
 
-- Normalization is a tradeoff, not an unconditional improvement: it restored the original-text behaviour for all four obfuscations (reproducing the original text exactly for 398/400 transformed inputs per model), including the original false-positive level. The recovery is partly by construction; normalization was written for these transforms.
+- Normalization is a tradeoff, not an unconditional improvement: on the four known synthetic transforms it restored the original-text behaviour, including the original false-positive level. That follows from a text-processing property (`normalize(transform(x))` reproduced the original prompt exactly for 398/400 transformed prompts, measured without any model); it is not evidence of robustness against unseen obfuscations.
 - Base64 and spaced text were mostly flagged unsafe even when benign (e.g. large, spaced, no norm: 95/100 recall but 93/100 benign flagged), so that is not meaningful detection.
-- The JBB benign prompts are deliberately borderline; FPR here is a strict stress test, not a traffic estimate (XSTest safe dev prompts: 0/30 large, 4/30 edge).
-- The large model's tokenizer produces `[UNK]` for zero-width characters (200/200 inputs); the edge tokenizer produces none.
+- The FPR figures are the observed flags on the JBB benign split under the dataset's labels, not a traffic estimate; whether some flags reflect a stricter policy than the dataset's is an untested interpretation (XSTest safe dev prompts, a different dataset: 0/30 large, 4/30 edge).
+- Tokenizer observation (descriptive): the large model's tokenizer emitted `[UNK]` on the zero-width inputs (200/200); the edge tokenizer emitted none. This does not establish the cause of the prediction changes.
 
-Code frozen at git tag `frozen-settings-v1` (commit `30d684f`); the final results were not used to select any setting. Audit of the headline numbers: `reports/evaluation_report.md` section 2.1.
+Code frozen at git tag `frozen-settings-v1` (commit `30d684f`). The pilot, dev and final stages ran automatically in one Kaggle notebook sequence, without a separate manual inspection gate; no setting was changed using final results. Audit of the headline numbers: `reports/evaluation_report.md` section 2.1.
 
 ## Install (Windows PowerShell)
 ```powershell
@@ -59,4 +59,4 @@ GPU results live in `results/gpu/` (use `--run gpu` with `make_metrics.py`); loc
 JBB-Behaviors (MIT) and XSTest (CC-BY-4.0, Röttger et al.) manifests, including prompt text, are redistributed with attribution; raw downloads are fetched by `scripts/prepare_data.py` at pinned revisions and not committed. Prompts include offensive/harmful requests (text only). New code in this repository has no license file yet; choose one before publishing. Model weights are not included.
 
 ## Limitations (see `docs/limitations.md`)
-Small single-source set; borderline-by-design benign prompts; one obfuscation at a time; normalizer tailored to the tested transforms (2/400 round trips inexact); possible training-data overlap; single-label outputs only (no threshold study); timings are for the tested machines and short prompts only; not a complete guardrail evaluation.
+Small single-source set; false positives measured against the dataset's benign labels (possible policy mismatch is untested); one obfuscation at a time; normalizer tailored to the tested synthetic transforms (2/400 round trips inexact; no evidence about unseen attacks); possible training-data overlap; single-label outputs only (no threshold study); timings are for the tested machines and short prompts only; not a complete guardrail evaluation.
