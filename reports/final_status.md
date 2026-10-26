@@ -27,7 +27,7 @@ Environment setup (`python -m venv`, `pip install torch gliclass transformers pa
 - Two normalization round-trips were inexact (documented, not patched after freezing).
 - `results/pilot_cpu_prefreeze_normalizer/` is an earlier CPU pilot output generated before the spaced-rule fix; retained for transparency, not used in reports.
 - Kaggle's CPU/GPU numbers are not an official benchmark; no timing comparison with CUDA at other batch sizes.
-- No LICENSE file was added (choose a license before publishing).
+- An MIT LICENSE file for the repository's own code was added at release preparation (dataset licenses are in THIRD_PARTY_NOTICES.md).
 - Nothing was published, pushed, or sent; the message to Ihor is a draft only.
 
 ## Deliverable paths (relative to the repository root)
@@ -40,6 +40,6 @@ Environment setup (`python -m venv`, `pip install torch gliclass transformers pa
 - Per-prompt predictions for inspection: `results/gpu/final/original_text_predictions.csv`
 
 ## Remaining manual steps
-1. Review `reports/` and decide whether to publish the repository (add a LICENSE) and replace `[repository link]` in the locally kept `reports/ihor_message_draft.md`.
+1. Review `reports/` and decide whether to publish the repository and replace `[repository link]` in the locally kept `reports/ihor_message_draft.md`.
 2. Optionally delete the private Kaggle kernel/dataset when no longer needed.
 3. Send the message yourself.

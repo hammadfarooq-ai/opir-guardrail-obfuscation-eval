@@ -47,4 +47,4 @@ SOFTWARE.
 This project depends on `gliclass` (Apache-2.0), `transformers`, `torch`, `matplotlib` and `numpy` under their own licenses; none of their code is copied into this repository.
 
 ## License of this repository's own code
-Not yet specified; see the repository root once a LICENSE file is added.
+The code authored for this repository is licensed under the MIT License (see `LICENSE`, copyright Hammad Farooq). The MIT license of the JBB data above is separate and covers only that dataset.
