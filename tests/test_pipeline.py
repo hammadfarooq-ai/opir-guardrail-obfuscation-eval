@@ -158,3 +158,18 @@ def test_adapter_parse_and_mocked_runner(tmp_path):
     calls = Mock.calls
     run(samples, m, tmp_path / "o", tmp_path / "c", "test", log=lambda *_: None)  # resume: only errors retried
     assert Mock.calls - calls < calls
+
+
+def test_shipped_manifests_isolation_and_labels():
+    """Runs without raw downloads: checks the frozen manifests themselves."""
+    final = data.load_manifest(ROOT / "data" / "manifests" / "final.jsonl")
+    dev = data.load_manifest(ROOT / "data" / "manifests" / "dev.jsonl")
+    assert len(final) == 200 and len(dev) == 60
+    assert {(r["label"]) for r in final} == {"unsafe", "benign"}
+    assert sum(r["label"] == "unsafe" for r in final) == 100 and sum(r["label"] == "unsafe" for r in dev) == 30
+    assert all((r["sample_id"].startswith("jbb-h")) == (r["label"] == "unsafe") for r in final)
+    assert all(r["sample_id"].startswith("xstest-") for r in dev)
+    assert not ({r["sample_id"] for r in final} & {r["sample_id"] for r in dev})
+    assert not ({data.canon(r["text"]) for r in final} & {data.canon(r["text"]) for r in dev})
+    assert len({data.canon(r["text"]) for r in final}) == 200  # no duplicates inside final
+    assert all(r["text_sha"] == data.sha(r["text"]) for r in final + dev)

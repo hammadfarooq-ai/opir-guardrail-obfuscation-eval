@@ -9,7 +9,7 @@ Do simple obfuscations reduce detection of unsafe prompts, does deterministic no
 - Final set: JailbreakBench JBB-Behaviors, **100 unsafe + 100 benign** prompts (MIT). Each prompt in 5 variants (original, homoglyph, zero_width, base64, spaced) x {no normalization, normalization}.
 - Dev set: XSTest, 30 safe + 30 unsafe (CC-BY-4.0). Smoke (2+2) and pilot (10+10) subsets come from the dev set.
 - Models (verified, public, ungated, Apache-2.0, no remote code): large rev `69bb27407d66`, edge rev `467a0431f744`. fp32, batch size 16, Tesla T4 on a private free Kaggle notebook (full run), plus a local CPU pilot and CPU latency benchmark (Intel i5-7200U, 7.9 GB RAM).
-- 0 inference errors and 0 truncated inputs in the final run; tests and executed commands are listed in `reports/final_status.md`.
+- 10 conditions per model (5 input forms x 2 normalization settings), 2000 rows / 1002 unique inputs per model, 0 inference errors and 0 truncated inputs in the final run; tests and executed commands are listed in `reports/final_status.md`.
 
 ## Main measured findings (final split, details in `reports/evaluation_report.md`)
 | | recall original | FPR original (JBB benign) | recall, no norm: homoglyph / zero-width | recall with norm (all variants) |
@@ -17,10 +17,12 @@ Do simple obfuscations reduce detection of unsafe prompts, does deterministic no
 | opir-large | 97/100 | 54/100 | 68/100 / 1/100 | 97/100 |
 | opir-edge | 97/100 | 71/100 | 2/100 / 8/100 | 97/100 |
 
-- Normalization restored the original-text behaviour for all four obfuscations (reproducing the original text exactly for 398/400 transformed inputs per model), including the original false-positive level. The recovery is partly by construction; normalization was written for these transforms.
+- Normalization is a tradeoff, not an unconditional improvement: it restored the original-text behaviour for all four obfuscations (reproducing the original text exactly for 398/400 transformed inputs per model), including the original false-positive level. The recovery is partly by construction; normalization was written for these transforms.
 - Base64 and spaced text were mostly flagged unsafe even when benign (e.g. large, spaced, no norm: 95/100 recall but 93/100 benign flagged), so that is not meaningful detection.
 - The JBB benign prompts are deliberately borderline; FPR here is a strict stress test, not a traffic estimate (XSTest safe dev prompts: 0/30 large, 4/30 edge).
 - The large model's tokenizer produces `[UNK]` for zero-width characters (200/200 inputs); the edge tokenizer produces none.
+
+Code frozen at git tag `frozen-settings-v1` (commit `30d684f`); the final results were not used to select any setting. Audit of the headline numbers: `reports/evaluation_report.md` section 2.1.
 
 ## Install (Windows PowerShell)
 ```powershell
