@@ -47,7 +47,7 @@ python scripts/make_metrics.py --stage final                     # metrics, tabl
 python scripts/extra_analysis.py --run gpu --stage final         # normalization fidelity, tokenizer, error overlap
 python scripts/bench_latency.py --device cpu --tag cpu           # latency (CPU and GPU kept in separate files)
 ```
-GPU results live in `results/gpu/` (use `--run gpu` with `make_metrics.py`); local CPU pilot results in `results/pilot/`. The final stage was only run on Kaggle (a CPU final run of ~1 h for the large model is feasible locally with the same command).
+GPU results live in `results/gpu/` (use `--run gpu` with `make_metrics.py`); local CPU pilot results in `results/pilot/`. The final stage was only run on Kaggle. A local CPU final run was not performed; from the CPU pilot rate (116 inputs in about 222 s for the large model) it would take roughly half an hour or more, but this is an unverified estimate.
 
 ### Kaggle (private notebook)
 `python scripts/build_kaggle_package.py --username <kaggle-user>` builds `kaggle/dataset` and `kaggle/kernel`. Then `kaggle datasets create -p kaggle/dataset --dir-mode zip` and `kaggle kernels push -p kaggle/kernel` (private, GPU and Internet enabled). The notebook installs `gliclass`, runs tests, verifies the manifests are reproduced, then runs pilot, dev and final one model at a time.
