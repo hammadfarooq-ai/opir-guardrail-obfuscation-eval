@@ -1,0 +1,42 @@
+{
+  "seed": 20261106,
+  "sources": {
+    "jbb": {
+      "repo": "JailbreakBench/JBB-Behaviors",
+      "revision": "886acc352a31533ffbcf4ef22c744658688086fc",
+      "license": "MIT",
+      "files": {
+        "harmful": "data/harmful-behaviors.csv",
+        "benign": "data/benign-behaviors.csv"
+      }
+    },
+    "xstest": {
+      "repo": "Paul/XSTest",
+      "revision": "f600c994b256f12867dfa5b3eb3d545a3e62f8b5",
+      "license": "CC-BY-4.0",
+      "files": {
+        "all": "xstest_prompts.csv"
+      }
+    }
+  },
+  "dropped": {
+    "final_duplicates": [],
+    "dev_duplicates_or_overlap": []
+  },
+  "counts": {
+    "final": {
+      "unsafe": 100,
+      "benign": 100
+    },
+    "dev": {
+      "unsafe": 30,
+      "benign": 30
+    }
+  },
+  "label_mapping": {
+    "jbb harmful split": "unsafe",
+    "jbb benign split": "benign",
+    "xstest label=unsafe": "unsafe",
+    "xstest label=safe": "benign"
+  }
+}

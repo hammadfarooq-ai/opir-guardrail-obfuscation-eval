@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "opir-guardrail-eval"
+version = "0.1.0"
+description = "Independent exploratory robustness evaluation of Opir (GLiClass) safety classifiers under input obfuscation"
+requires-python = ">=3.10"
+dependencies = ["gliclass>=0.1.21", "transformers>=5.0", "torch>=2.0", "numpy>=2.0", "matplotlib>=3.8"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

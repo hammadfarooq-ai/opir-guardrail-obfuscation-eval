@@ -1,0 +1,13 @@
+.venv/
+.cache/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+logs/
+# raw third-party data is re-fetched by scripts/prepare_data.py (pinned revisions)
+data/raw/
+# model weights / HF caches
+*.safetensors
+*.bin
+.env
