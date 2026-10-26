@@ -12,3 +12,6 @@ data/raw/
 *.bin
 .env
 kaggle/
+# redundant archive of results/gpu and personal draft kept locally only
+results/kaggle_run1/*.zip
+reports/ihor_message_draft.md

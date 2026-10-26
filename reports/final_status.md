@@ -6,7 +6,7 @@
 - **Full evaluation executed on Kaggle (free GPU, private notebook)**: both models, one at a time, pilot (10+10) -> dev (30+30) -> final (100+100), all 5 conditions x {no norm, norm}. 0 inference errors, 0 truncations. 10 conditions per model (5 input forms x 2 normalization settings; an earlier mention of 12 was an error), 2000 rows and 1002 unique inputs per model (reconciliation in evaluation_report.md section 2.1).
 - Kaggle: kernel `malikhammadfarooq/opir-guardrail-eval-gpu` (private), version 1, status COMPLETE (verified with `kaggle kernels status`), URL https://www.kaggle.com/code/malikhammadfarooq/opir-guardrail-eval-gpu . GPU: Tesla T4 (2 available; cuda:0 used), CUDA 12.8 build, torch 2.11.0+cu128, transformers 5.16.1, gliclass 0.1.21, fp32, batch size 16. End-to-end final-stage loop time on the T4 (includes token statistics and cache writes, not model-only throughput; see evaluation_report.md section 6.1): 1.9 s (edge) and 22.2 s (large) for 1002 unique inputs; total notebook runtime was under about 5 minutes (pushed ~15:05 and seen COMPLETE at 15:10 by local-clock status polling; nvidia-smi in the run logged 10:05 on the Kaggle clock; exact runtime not recorded by the kernel API).
 - Local: CPU pilot (10+10) for both models with the frozen code, CPU latency benchmark; CPU and GPU pilots agree (0 label disagreements, max score difference < 5e-5).
-- Outputs downloaded to `D:\Projects\opir-guardrail-eval\results\gpu\` (predictions, run metadata, logs, cache, pip freeze, latency) and `results/kaggle_run1/` (kernel log + results zip).
+- Outputs downloaded to `results/gpu/` (predictions, run metadata, logs, cache, pip freeze, latency) and `results/kaggle_run1/` (kernel log + results zip).
 
 ## Checks performed before launch
 - The earlier broken `data.py` commit (7214c84) was fixed in `30d684f`; tag `frozen-settings-v1` was re-pointed (local tag only) to `30d684f` and verified; the tagged `data.py` parses; tests pass (13 locally).
@@ -30,8 +30,8 @@ Environment setup (`python -m venv`, `pip install torch gliclass transformers pa
 - No LICENSE file was added (choose a license before publishing).
 - Nothing was published, pushed, or sent; the message to Ihor is a draft only.
 
-## Deliverable paths (D:\Projects\opir-guardrail-eval)
-- `README.md`, `reports/evaluation_report.md`, `reports/ihor_message_draft.md`, `reports/final_status.md`
+## Deliverable paths (relative to the repository root)
+- `README.md`, `THIRD_PARTY_NOTICES.md`, `reports/evaluation_report.md`, `reports/final_status.md`; the message draft `reports/ihor_message_draft.md` is kept locally and untracked (not part of the release)
 - `docs/sources.md`, `docs/methodology.md`, `docs/limitations.md`
 - `results/gpu/final/` (predictions_*.jsonl, run_meta_*.json, metrics.json, tables.md, extra.json), `results/gpu/dev`, `results/gpu/pilot`, `results/gpu/latency_gpu.json`, `results/latency/latency_cpu.json`, `results/pilot/` (local CPU)
 - `reports/figures/gpu_final_{recall,fpr,normalization_effect}.png`
@@ -40,6 +40,6 @@ Environment setup (`python -m venv`, `pip install torch gliclass transformers pa
 - Per-prompt predictions for inspection: `results/gpu/final/original_text_predictions.csv`
 
 ## Remaining manual steps
-1. Review `reports/` and decide whether to publish the repository (add a LICENSE) and replace `[repository link]` in `reports/ihor_message_draft.md`.
+1. Review `reports/` and decide whether to publish the repository (add a LICENSE) and replace `[repository link]` in the locally kept `reports/ihor_message_draft.md`.
 2. Optionally delete the private Kaggle kernel/dataset when no longer needed.
 3. Send the message yourself.
