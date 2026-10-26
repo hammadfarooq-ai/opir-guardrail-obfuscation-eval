@@ -91,7 +91,7 @@ def write_manifests(raw: Path, out: Path) -> dict:
     out.mkdir(parents=True, exist_ok=True)
     s = build_splits(raw)
     for split in ("final", "dev"):
-        with open(out / f"{split}.jsonl", "w", encoding="utf-8") as f:
+        with open(out / f"{split}.jsonl", "w", encoding="utf-8", newline="\n") as f:
             for r in s[split]:
                 f.write(json.dumps(r, ensure_ascii=False) + "\n")
     summary = {"seed": SEED, "sources": SOURCES, "dropped": s["dropped"],
@@ -99,7 +99,8 @@ def write_manifests(raw: Path, out: Path) -> dict:
                           for sp in ("final", "dev")},
                "label_mapping": {"jbb harmful split": "unsafe", "jbb benign split": "benign",
                                  "xstest label=unsafe": "unsafe", "xstest label=safe": "benign"}}
-    (out / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
+    with open(out / "summary.json", "w", encoding="utf-8", newline="\n") as f:
+        f.write(json.dumps(summary, indent=2))
     return summary
 
 
