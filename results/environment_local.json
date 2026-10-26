@@ -1,0 +1,11 @@
+{
+  "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "processor": "Intel64 Family 6 Model 142 Stepping 9, GenuineIntel",
+  "torch": "2.14.1+cpu",
+  "transformers": "5.20.2",
+  "cuda_available": false,
+  "cpu_threads": 2,
+  "ram_gb": 7.9,
+  "gpu": "none (Intel HD 620, no CUDA)"
+}

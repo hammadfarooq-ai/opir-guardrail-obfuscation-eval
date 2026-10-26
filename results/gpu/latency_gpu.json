@@ -1,0 +1,73 @@
+{
+  "hardware": {
+    "processor": "x86_64",
+    "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+    "device": "cuda:0",
+    "gpu": "Tesla T4",
+    "torch": "2.11.0+cu128",
+    "threads": 2,
+    "dtype": "float32"
+  },
+  "n_prompts": 40,
+  "models": {
+    "opir-edge": {
+      "load_seconds_cached_weights": 0.879146755000022,
+      "mean_full_input_tokens": 16.875,
+      "batch1_latency_seconds": {
+        "p50": 0.007728503999999248,
+        "p95": 0.008645939000018643,
+        "mean": 0.007820950874999255
+      },
+      "batch_throughput": {
+        "batch_size": 16,
+        "texts": 40,
+        "wall_seconds": 0.03640364599999657,
+        "texts_per_second": 1098.7910386779326
+      },
+      "note": "cuda:0, fp32; original (unobfuscated) short prompts only"
+    },
+    "opir-large": {
+      "load_seconds_cached_weights": 1.691226764000021,
+      "mean_full_input_tokens": 16.775,
+      "batch1_latency_seconds": {
+        "p50": 0.03911418100003061,
+        "p95": 0.046766793000017515,
+        "mean": 0.047221528700004
+      },
+      "batch_throughput": {
+        "batch_size": 16,
+        "texts": 40,
+        "wall_seconds": 0.3513278580000474,
+        "texts_per_second": 113.85376675707454
+      },
+      "note": "cuda:0, fp32; original (unobfuscated) short prompts only"
+    }
+  },
+  "normalization_seconds_per_input": {
+    "original": {
+      "median": 4.464699998152355e-05,
+      "p95": 8.397599998488658e-05,
+      "max": 0.0003744190000247727
+    },
+    "homoglyph": {
+      "median": 6.357699999171018e-05,
+      "p95": 0.00010793200004854953,
+      "max": 0.00011860000000751825
+    },
+    "zero_width": {
+      "median": 4.2302999986532086e-05,
+      "p95": 7.808200001591104e-05,
+      "max": 8.682000003545909e-05
+    },
+    "base64": {
+      "median": 5.471100001841478e-05,
+      "p95": 9.732800003803277e-05,
+      "max": 0.00011441399999512214
+    },
+    "spaced": {
+      "median": 7.563649998587607e-05,
+      "p95": 0.00013060599997061217,
+      "max": 0.00016357900000230075
+    }
+  }
+}

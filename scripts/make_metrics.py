@@ -14,8 +14,10 @@ from opir_guardrail_eval.transforms import CONDITIONS_ORDER  # noqa: E402
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--stage", required=True)
+ap.add_argument("--run", default="", help="results subfolder (e.g. gpu); default = results/<stage> (local CPU runs)")
 a = ap.parse_args()
-rd = ROOT / "results" / a.stage
+rd = ROOT / "results" / a.run / a.stage if a.run else ROOT / "results" / a.stage
+TAG = f"{a.run}_{a.stage}" if a.run else a.stage
 fig_dir = ROOT / "reports" / "figures"
 fig_dir.mkdir(parents=True, exist_ok=True)
 models = sorted(p.stem.replace("predictions_", "") for p in rd.glob("predictions_*.jsonl"))
@@ -70,8 +72,8 @@ def bars(metric, ci_key, title, fname, ylabel):
             rs = {r["condition"]: r for r in allm[m]["per_condition"] if r["normalized"] == norm}
             xs = [j + i * w for j in range(len(CONDITIONS_ORDER))]
             ys = [100 * (rs[c][metric] or 0) for c in CONDITIONS_ORDER]
-            err = [[100 * ((rs[c][metric] or 0) - (rs[c][ci_key][0] or 0)) for c in CONDITIONS_ORDER],
-                   [100 * ((rs[c][ci_key][1] or 0) - (rs[c][metric] or 0)) for c in CONDITIONS_ORDER]]
+            err = [[max(0.0, 100 * ((rs[c][metric] or 0) - (rs[c][ci_key][0] or 0))) for c in CONDITIONS_ORDER],
+                   [max(0.0, 100 * ((rs[c][ci_key][1] or 0) - (rs[c][metric] or 0))) for c in CONDITIONS_ORDER]]
             ax.bar(xs, ys, w, yerr=err, capsize=2, label=m, color=colors.get(m))
         ax.set_xticks([j + w * (len(models) - 1) / 2 for j in range(len(CONDITIONS_ORDER))])
         ax.set_xticklabels(CONDITIONS_ORDER, rotation=20)
@@ -81,7 +83,7 @@ def bars(metric, ci_key, title, fname, ylabel):
     axes[0].legend()
     fig.suptitle(f"{title} ({a.stage} split; 95% Wilson CI)")
     fig.tight_layout()
-    fig.savefig(fig_dir / f"{a.stage}_{fname}.png", dpi=150)
+    fig.savefig(fig_dir / f"{TAG}_{fname}.png", dpi=150)
     plt.close(fig)
 
 
@@ -103,5 +105,5 @@ for ax, m in zip(axes[0], models):
 axes[0][0].legend(fontsize=8)
 fig.suptitle(f"Normalization recoveries and regressions, paired by source prompt ({a.stage})")
 fig.tight_layout()
-fig.savefig(fig_dir / f"{a.stage}_normalization_effect.png", dpi=150)
+fig.savefig(fig_dir / f"{TAG}_normalization_effect.png", dpi=150)
 print("wrote", rd / "metrics.json", rd / "tables.md", "and figures")

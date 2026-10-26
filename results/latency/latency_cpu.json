@@ -1,0 +1,73 @@
+{
+  "hardware": {
+    "processor": "Intel64 Family 6 Model 142 Stepping 9, GenuineIntel",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "device": "cpu",
+    "gpu": null,
+    "torch": "2.14.1+cpu",
+    "threads": 2,
+    "dtype": "float32"
+  },
+  "n_prompts": 40,
+  "models": {
+    "opir-edge": {
+      "load_seconds_cached_weights": 2.86277870000049,
+      "mean_full_input_tokens": 16.875,
+      "batch1_latency_seconds": {
+        "p50": 0.0430234500017832,
+        "p95": 0.09758099999817205,
+        "mean": 0.050074472499818515
+      },
+      "batch_throughput": {
+        "batch_size": 8,
+        "texts": 40,
+        "wall_seconds": 0.7845904999994673,
+        "texts_per_second": 50.98200908630319
+      },
+      "note": "cpu, fp32; original (unobfuscated) short prompts only"
+    },
+    "opir-large": {
+      "load_seconds_cached_weights": 28.61370530000204,
+      "mean_full_input_tokens": 16.775,
+      "batch1_latency_seconds": {
+        "p50": 2.7867330000008224,
+        "p95": 5.445788299999549,
+        "mean": 3.1695806174997414
+      },
+      "batch_throughput": {
+        "batch_size": 8,
+        "texts": 40,
+        "wall_seconds": 24.63298240000222,
+        "texts_per_second": 1.6238391011880233
+      },
+      "note": "cpu, fp32; original (unobfuscated) short prompts only"
+    }
+  },
+  "normalization_seconds_per_input": {
+    "original": {
+      "median": 9.225000030710362e-05,
+      "p95": 0.0001779000012902543,
+      "max": 0.002817600001435494
+    },
+    "homoglyph": {
+      "median": 7.225000081234612e-05,
+      "p95": 0.00015549999807262793,
+      "max": 0.0009718000001157634
+    },
+    "zero_width": {
+      "median": 5.4549998822039925e-05,
+      "p95": 8.920000254875049e-05,
+      "max": 0.00011249999806750566
+    },
+    "base64": {
+      "median": 6.9949999669916e-05,
+      "p95": 0.00011350000204402022,
+      "max": 0.00014209999790182337
+    },
+    "spaced": {
+      "median": 0.00017144999765150715,
+      "p95": 0.0004031999997096136,
+      "max": 0.0004622000014933292
+    }
+  }
+}

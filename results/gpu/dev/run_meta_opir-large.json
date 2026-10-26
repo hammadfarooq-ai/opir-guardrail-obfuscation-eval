@@ -1,0 +1,39 @@
+{
+  "stage": "dev",
+  "model": "opir-large",
+  "settings": {
+    "repo": "knowledgator/opir-multitask-large-v1.0",
+    "revision": "69bb27407d66eab4797049d36ba75eef3579335b",
+    "labels": [
+      "safe",
+      "unsafe"
+    ],
+    "mode": "single-label",
+    "max_length": 1024,
+    "device": "cuda:0",
+    "dtype": "float32",
+    "decision": "top label of single-label output"
+  },
+  "n_samples": 60,
+  "n_rows": 600,
+  "n_unique_inputs": 300,
+  "n_newly_inferred": 200,
+  "model_load_seconds": 2.0606554839999944,
+  "inference_wall_seconds_this_run": 3.643349377999982,
+  "batch_size": 16,
+  "python": "3.13.15 (main, Aug  6 2026, 11:06:22) [GCC 13.3.0]",
+  "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+  "processor": "x86_64",
+  "finished_utc": "2026-10-26T10:07:00Z",
+  "torch": "2.11.0+cu128",
+  "transformers": "5.16.1",
+  "cuda_available": true,
+  "torch_threads": 2,
+  "cuda_version": "12.8",
+  "gpu": "Tesla T4",
+  "gpu_capability": [
+    7,
+    5
+  ],
+  "gpu_memory_gb": 14.6
+}
