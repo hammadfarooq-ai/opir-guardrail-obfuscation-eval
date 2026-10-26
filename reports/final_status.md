@@ -9,7 +9,7 @@
 - Outputs downloaded to `results/gpu/` (predictions, run metadata, logs, cache, pip freeze, latency) and `results/kaggle_run1/` (kernel log + results zip).
 
 ## Checks performed before launch
-- The earlier broken `data.py` commit (7214c84) was fixed in `30d684f`; tag `frozen-settings-v1` was re-pointed (local tag only) to `30d684f` and verified; the tagged `data.py` parses; tests pass (13 locally).
+- The earlier broken `data.py` commit (499f0f2) was fixed in `0e2f19e`; tag `frozen-settings-v1` was re-pointed (local tag only) to `0e2f19e` and verified; the tagged `data.py` parses; tests pass (13 locally).
 - Dataset hashes: Kaggle's dataset download endpoint returned 404 for the private dataset, so verification was done from inside the Kaggle run: the notebook's working copy (17 files) is sha256-identical to the local package, and the notebook re-fetched the public data and reproduced the shipped manifests byte for byte (assertion passed).
 - GPU: nvidia-smi showed 2x Tesla T4; the notebook asserts `torch.cuda.is_available()` and runs a CUDA matmul.
 - Secret scan of repository, notebook, logs: only revision hashes matched; no credential files tracked. Kaggle credentials are read from the CLI's own config and were never printed.
@@ -36,8 +36,11 @@ Environment setup (`python -m venv`, `pip install torch gliclass transformers pa
 - `results/gpu/final/` (predictions_*.jsonl, run_meta_*.json, metrics.json, tables.md, extra.json), `results/gpu/dev`, `results/gpu/pilot`, `results/gpu/latency_gpu.json`, `results/latency/latency_cpu.json`, `results/pilot/` (local CPU)
 - `reports/figures/gpu_final_{recall,fpr,normalization_effect}.png`
 - `data/manifests/`, `requirements.lock.txt`, `results/environment_local.json`, `results/gpu/pip_freeze.txt`
-- Git: local repository, tag `frozen-settings-v1` -> `30d684f51c20336f3566fef4d89669da08a7a04f` (inference code, run_eval.py and manifests unchanged since); later commits add results, reports, diagnostics and one test.
+- Git: local repository, tag `frozen-settings-v1` -> `0e2f19e96468c071e291d9b2acba9d4f51addfa7` (inference code, run_eval.py and manifests unchanged since); later commits add results, reports, diagnostics and one test.
 - Per-prompt predictions for inspection: `results/gpu/final/original_text_predictions.csv`
+
+## Git history note
+Before publication the local commit author/committer identity was rewritten to the project owner's GitHub noreply address (`git filter-branch`; all 11 commits and the `frozen-settings-v1` tag were rewritten). Every rewritten commit has a byte-identical tree to its original (verified commit by commit), so code, data and results are unchanged; only commit hashes changed, and the hashes quoted in these documents are the rewritten ones. The pre-rewrite history is kept only in a backup bundle outside the repository.
 
 ## Remaining manual steps
 1. Review `reports/` and decide whether to publish the repository and replace `[repository link]` in the locally kept `reports/ihor_message_draft.md`.

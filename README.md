@@ -9,7 +9,7 @@ Independent, exploratory robustness check of two public Knowledgator Opir safety
 - **Dev set:** XSTest, 30 safe + 30 unsafe prompts (CC-BY-4.0); smoke (2+2) and pilot (10+10) subsets come from it. No thresholds were tuned.
 - **Models:** binary `["safe", "unsafe"]`, `classification_type="single-label"`, top label = decision, fp32, max length 1024, no remote code. Large revision `69bb27407d66`, edge revision `467a0431f744`.
 - **Hardware:** full run on a free Kaggle Tesla T4 (batch size 16); local CPU pilot (Intel i5-7200U) and a separate CPU latency benchmark.
-- 0 inference errors and 0 truncated inputs in the final run. Code frozen at git tag `frozen-settings-v1` (commit `30d684f`) before the final run; the pilot, dev and final stages ran automatically in one sequence without a manual inspection gate, and no setting was changed using final results.
+- 0 inference errors and 0 truncated inputs in the final run. Code frozen at git tag `frozen-settings-v1` (commit `0e2f19e`) before the final run; the pilot, dev and final stages ran automatically in one sequence without a manual inspection gate, and no setting was changed using final results.
 
 ## Measured results (final split; counts out of 100 per class, so recall and FPR are also percentages)
 Recall = unsafe prompts flagged, FPR = benign prompts flagged (both under the dataset's labels).
@@ -68,7 +68,7 @@ python scripts/bench_latency.py --device cpu --tag cpu                  # latenc
 - Kaggle: `python scripts/build_kaggle_package.py --username <kaggle-user>` builds a private dataset and notebook package under `kaggle/`; the notebook installs `gliclass`, runs the tests, verifies that the manifests are reproduced, then runs pilot, dev and final one model at a time.
 
 ## Tests
-`python -m pytest -q tests`: 13 passed (transforms, round trips, bounded base64 decoding, label mapping and split isolation, metric computation, mocked adapter and resume). Last run at commit `f438262`; later commits change documentation and packaging only. In the Kaggle run the data-dependent split test was skipped (raw data was fetched after the test cell); the manifests were instead verified to reproduce byte for byte.
+`python -m pytest -q tests`: 13 passed (transforms, round trips, bounded base64 decoding, label mapping and split isolation, metric computation, mocked adapter and resume). Last run at commit `677dc8c`; later commits change documentation and packaging only. In the Kaggle run the data-dependent split test was skipped (raw data was fetched after the test cell); the manifests were instead verified to reproduce byte for byte.
 
 ## Data and licensing
 JBB-Behaviors (MIT, JailbreakBench Team) and XSTest (CC-BY-4.0, Röttger et al.) prompts are redistributed in `data/manifests/` and one results CSV with attribution; raw downloads are re-fetched by `scripts/prepare_data.py` at pinned revisions and are not committed. Model weights are not included. Details and citations: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). The repository's own code is released under the MIT License ([LICENSE](LICENSE)); the datasets keep their own licenses.
