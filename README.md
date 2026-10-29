@@ -1,4 +1,4 @@
-# opir-guardrail-eval
+# opir-guardrail-obfuscation-eval
 
 Independent, exploratory robustness check of two public Knowledgator Opir safety classifiers (`knowledgator/opir-multitask-large-v1.0` and `knowledgator/opir-edge-v1.0`) under common input obfuscations (homoglyphs, zero-width characters, base64, spaced-out letters), with and without a documented normalization step. **Not an official Knowledgator benchmark.**
 
@@ -39,8 +39,8 @@ Recall = unsafe prompts flagged, FPR = benign prompts flagged (both under the da
 
 ## Install (Windows PowerShell; Linux/macOS equivalents work too)
 ```powershell
-git clone <repository-url> opir-guardrail-eval
-cd opir-guardrail-eval
+git clone https://github.com/hammadfarooq-ai/opir-guardrail-obfuscation-eval.git
+cd opir-guardrail-obfuscation-eval
 py -3.13 -m venv .venv                 # Python >= 3.10
 .\.venv\Scripts\Activate.ps1
 pip install torch --index-url https://download.pytorch.org/whl/cpu   # CPU build; use a CUDA build for GPU
