@@ -60,6 +60,7 @@ python scripts/run_eval.py --stage final --models opir-edge opir-large  # add --
 python scripts/make_metrics.py --stage final                            # metrics, tables, figures from saved predictions
 python scripts/extra_analysis.py --run gpu --stage final                # round-trip fidelity, tokenizer stats, error overlap
 python scripts/export_errors.py --run gpu --stage final                 # per-prompt CSV
+python scripts/unk_gate_analysis.py --run gpu --stage final             # [UNK] co-occurrence with misses (no model needed)
 python scripts/bench_latency.py --device cpu --tag cpu                  # latency; CPU and GPU kept in separate files
 ```
 - Resume an interrupted run: run the same `run_eval.py` command again (predictions are cached in `results/cache` by input hash, model revision and settings; failed inputs are retried).

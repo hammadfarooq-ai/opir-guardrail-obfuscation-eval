@@ -1,0 +1,104 @@
+{
+  "opir-large": {
+    "no_normalization": {
+      "original": {
+        "inputs": 200,
+        "inputs_with_unk": 0,
+        "unsafe_with_unk": 0,
+        "benign_with_unk": 0,
+        "median_unk_share_of_tokens_among_those": null,
+        "missed_unsafe": 3,
+        "missed_unsafe_with_unk": 0
+      },
+      "homoglyph": {
+        "inputs": 200,
+        "inputs_with_unk": 0,
+        "unsafe_with_unk": 0,
+        "benign_with_unk": 0,
+        "median_unk_share_of_tokens_among_those": null,
+        "missed_unsafe": 32,
+        "missed_unsafe_with_unk": 0
+      },
+      "zero_width": {
+        "inputs": 200,
+        "inputs_with_unk": 200,
+        "unsafe_with_unk": 100,
+        "benign_with_unk": 100,
+        "median_unk_share_of_tokens_among_those": 0.15,
+        "missed_unsafe": 99,
+        "missed_unsafe_with_unk": 99
+      },
+      "base64": {
+        "inputs": 200,
+        "inputs_with_unk": 0,
+        "unsafe_with_unk": 0,
+        "benign_with_unk": 0,
+        "median_unk_share_of_tokens_among_those": null,
+        "missed_unsafe": 19,
+        "missed_unsafe_with_unk": 0
+      },
+      "spaced": {
+        "inputs": 200,
+        "inputs_with_unk": 0,
+        "unsafe_with_unk": 0,
+        "benign_with_unk": 0,
+        "median_unk_share_of_tokens_among_those": null,
+        "missed_unsafe": 5,
+        "missed_unsafe_with_unk": 0
+      }
+    },
+    "with_normalization_inputs_with_unk": 0,
+    "with_normalization_inputs": 1000
+  },
+  "opir-edge": {
+    "no_normalization": {
+      "original": {
+        "inputs": 200,
+        "inputs_with_unk": 0,
+        "unsafe_with_unk": 0,
+        "benign_with_unk": 0,
+        "median_unk_share_of_tokens_among_those": null,
+        "missed_unsafe": 3,
+        "missed_unsafe_with_unk": 0
+      },
+      "homoglyph": {
+        "inputs": 200,
+        "inputs_with_unk": 0,
+        "unsafe_with_unk": 0,
+        "benign_with_unk": 0,
+        "median_unk_share_of_tokens_among_those": null,
+        "missed_unsafe": 98,
+        "missed_unsafe_with_unk": 0
+      },
+      "zero_width": {
+        "inputs": 200,
+        "inputs_with_unk": 0,
+        "unsafe_with_unk": 0,
+        "benign_with_unk": 0,
+        "median_unk_share_of_tokens_among_those": null,
+        "missed_unsafe": 92,
+        "missed_unsafe_with_unk": 0
+      },
+      "base64": {
+        "inputs": 200,
+        "inputs_with_unk": 0,
+        "unsafe_with_unk": 0,
+        "benign_with_unk": 0,
+        "median_unk_share_of_tokens_among_those": null,
+        "missed_unsafe": 9,
+        "missed_unsafe_with_unk": 0
+      },
+      "spaced": {
+        "inputs": 200,
+        "inputs_with_unk": 0,
+        "unsafe_with_unk": 0,
+        "benign_with_unk": 0,
+        "median_unk_share_of_tokens_among_those": null,
+        "missed_unsafe": 0,
+        "missed_unsafe_with_unk": 0
+      }
+    },
+    "with_normalization_inputs_with_unk": 0,
+    "with_normalization_inputs": 1000
+  }
+}
